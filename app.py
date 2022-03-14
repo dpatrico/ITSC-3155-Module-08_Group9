@@ -17,16 +17,13 @@ def list_all_movies():
     #Recieve the movies by using the get_all_movies function in the movie_repository script
     movie_title_list = movie_repository_singleton.get_all_movies()
 
-    #create a variable to hold the movie title and it's rating
-    movie_title = None
-    movie_ratings = None
     #Use a for loop to iterate through each movie and then set the title and rating variables to the movie's title and rating entered
     for movie in movie_title_list:
         movie_title = movie.title
         movie_ratings = movie.rating
+        #Use the movies title as the KEY and use the movies rating as the VALUE inside of the dict
+        movie_rating_dict[movie_title] = movie_ratings
 
-    #Use the movies title as the KEY and use the movies rating as the VALUE inside of the dict
-    movie_rating_dict[movie_title] = movie_ratings
     return render_template('list_all_movies.html', list_movies_active=True, movie_rating_dict = movie_rating_dict)
 
 
