@@ -6,4 +6,23 @@
 <h1 class="mb-5">All Movies</h1>
 <p class="mb-3">See our list of movie ratings below</p>
 <!-- TODO: Feature 1 -->
+<!--The CSS used on this page is from bootstrap found at this link: https://getbootstrap.com/docs/4.0/content/tables/-->
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--Use a for loop that iterates through the key (movies title) and pair with the value (movies rating)-->
+        {% for movie_title, movie_ratings in movie_rating_dict.items() %}
+        <tr>
+            <!--Add the key (movies title) data into a row with it's corresponding value (movies rating) data-->
+            <td>{{ movie_title }}</td>
+            <td>{{ movie_ratings }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
