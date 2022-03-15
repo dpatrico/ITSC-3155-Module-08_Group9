@@ -27,3 +27,6 @@ def test_createMovieFn():
     assert mov_list[0].director == ''
     assert mov_list[0].rating == '1'
 
+    # clean between takes
+    mov_list.clear()
+
