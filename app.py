@@ -33,15 +33,26 @@ def create_movies_form():
 
 
 @app.post('/movies')
-def create_movie():
+def create_movie(title = None, director = None, rating = None):
     # TODO: Feature 2
-    movie_title = request.form.get('title')
-    movie_director = request.form.get('director')
-    movie_rating = request.form.get('rating')
+
+
+    if title == None: # check if from function (testing purposes) or if from html form
+        title = request.form.get('title')
+    if director == None:
+        director = request.form.get('director')
+    if rating == None:
+        rating = request.form.get('rating')
+
+    
+    if rating < "1":  # basic input validation
+        rating = "1"
+    if rating > "5":
+        rating = "5"
     # get all the necessary info from the html form (title, director, rating)
 
     movie_db = movie_repository_singleton  # object for movie_repository
-    movie_db.create_movie(movie_title, movie_director, movie_rating)  # create a movie using the above features
+    movie_db.create_movie(title, director, rating)  # create a movie using the above features
     # After creating the movie in the database, we redirect to the list all movies page
     return redirect('/movies')
 
