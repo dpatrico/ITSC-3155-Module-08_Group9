@@ -6,4 +6,28 @@
 <h1 class="mb-5">Search Movie Ratings</h1>
 <p class="mb-3">Search for a movie rating below</p>
 <!-- TODO: Feature 3 -->
+<form action="/movies/search" method="get">
+    <label for="searchquery">Enter a title to search by: </label>
+    <input type="text" id="searchquery" name="searchquery">
+    <input type="submit" value="submit">
+</form>
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--Use a for loop that iterates through the key (movies title) and pair with the value (movies rating)-->
+        {% for key in titles%}
+        <tr>
+            <!--Add the key (movies title) data into a row with it's corresponding value (movies rating) data-->
+            <td>{{ key }}</td>
+            <td>{{ titles[key] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

@@ -3,6 +3,7 @@ from src.repositories.movie_repository import movie_repository_singleton
 
 #Create a global dictionary for Feature 1
 movie_rating_dict = {}
+search_dict = {}
 
 app = Flask(__name__)
 
@@ -44,13 +45,13 @@ def create_movie(title = None, director = None, rating = None):
     if director == None:
         director = request.form.get('director')
     if rating == None:
-        rating = request.form.get('rating')
+        rating = int(request.form.get('rating'))
 
     
-    if rating < "1":  # basic input validation
-        rating = "1"
-    if rating > "5":
-        rating = "5"
+    if rating < 1:  # basic input validation
+        rating = 1
+    if rating > 5:
+        rating = 5
     # get all the necessary info from the html form (title, director, rating)
 
     movie_db = movie_repository_singleton  # object for movie_repository
@@ -62,7 +63,15 @@ def create_movie(title = None, director = None, rating = None):
 @app.get('/movies/search')
 def search_movies():
     # TODO: Feature 3
-    return render_template('search_movies.html', search_active=True)
+    movie_title_list = movie_repository_singleton.get_all_movies()
+
+    searchtitle = request.args.get('searchquery')  # get the title from the form
+
+    for movie in movie_title_list:
+        if searchtitle == movie.title:
+            search_dict[movie.title] = movie.rating
+
+    return render_template('search_movies.html', search_active=True, titles = search_dict)
 
 
 if __name__ == "__main__":
