@@ -64,6 +64,8 @@ def create_movie(title = None, director = None, rating = None):
 def search_movies():
     # TODO: Feature 3
     movie_title_list = movie_repository_singleton.get_all_movies()
+    search_dict.clear()  # clear between searches for better results
+
 
     searchtitle = request.args.get('searchquery')  # get the title from the form
 
